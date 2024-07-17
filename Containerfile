@@ -17,4 +17,4 @@ RUN if test -z "$sshpubkey"; then echo "Must provide an ssh public key"; exit 1;
     chmod 0700 /home/fedora/.ssh && \
     echo "$sshpubkey" > /home/fedora/.ssh/authorized_keys && \
     chmod 0600 /home/fedora/.ssh/authorized_keys && \
-    chown -R bryon:fedora /home/fedora
+    chown -R fedora:fedora /home/fedora
