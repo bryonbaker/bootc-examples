@@ -19,3 +19,8 @@ push:
 
 clean:
 	podman rmi -f $(IMAGE_NAME):$(TAG) || true
+
+boot:
+	sudo podman run --rm -it --privileged -v .:/output:Z \
+	registry.redhat.io/rhel9/bootc-image-builder \
+	--type qcow2 $(IMAGE_NAME):$(TAG)
