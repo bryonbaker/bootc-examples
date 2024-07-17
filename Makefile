@@ -6,7 +6,7 @@ SSH_PUB_KEY := $(shell cat $(HOME)/.ssh/id_rsa.pub)
 
 .PHONY: all build push clean
 
-all: build push
+all: clean build push boot
 
 build:
 	podman build \
