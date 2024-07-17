@@ -4,7 +4,7 @@ TAG := latest
 SSH_PUB_KEY := $(shell cat $(HOME)/.ssh/id_rsa.pub)
 
 
-.PHONY: all build push clean
+.PHONY: all build push clean boot
 
 all: clean build push boot
 
