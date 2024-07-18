@@ -6,6 +6,16 @@ RUN systemctl enable cockpit.socket
 ADD etc etc
 ADD usr usr
 
+# Update some defaults
+# This prevents the mailbox warning when creating the user.
+ENV USERADD=/etc/default/useradd
+RUN if grep -q '^CREATE_MAIL_SPOOL=' $USERADD; \
+    then \
+        sed -i '/^CREATE_MAIL_SPOOL=/c\CREATE_MAIL_SPOOL=no' $USERADD; \
+    else \
+        sed -i '$aCREATE_MAIL_SPOOL=no' $USERADD; \
+    fi
+
 # Set the sudoers permissions
 RUN chmod 0440 /etc/sudoers.d/wheel
 
