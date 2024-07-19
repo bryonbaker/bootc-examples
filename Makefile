@@ -1,5 +1,5 @@
 # Makefile for building shakeout-app container
-IMAGE_NAME := quay.io/bryonbaker/fedora-bootc
+IMAGE_NAME := quay.io/bryonbaker/rhel9-bootc
 TAG := latest
 SSH_PUB_KEY := $(shell cat $(HOME)/.ssh/id_rsa.pub)
 
@@ -23,4 +23,4 @@ clean:
 boot:
 	sudo podman run --rm -it --privileged -v .:/output:Z \
 	registry.redhat.io/rhel9/bootc-image-builder \
-	--type qcow2 $(IMAGE_NAME):$(TAG)
+	--type anaconda-iso $(IMAGE_NAME):$(TAG)

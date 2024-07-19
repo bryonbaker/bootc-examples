@@ -1,6 +1,10 @@
-FROM quay.io/fedora/fedora-bootc:40
-RUN dnf install -y cockpit && dnf clean all
-RUN systemctl enable cockpit.socket
+#FROM quay.io/fedora/fedora-bootc:40
+FROM registry.redhat.io/rhel9/rhel-bootc
+RUN <<EOF
+    dnf install -y cockpit
+    dnf clean all
+    systemctl enable cockpit.socket
+EOF
 
 # Copy the files and directories from the build context into the image.
 ADD etc etc
@@ -28,10 +32,10 @@ RUN <<EOF
         echo "Must provide an ssh public key"; 
         exit 1; 
     fi;
-    useradd -G wheel fedora
-    mkdir -p /home/fedora/.ssh
-    chmod 0700 /home/fedora/.ssh
-    echo "$sshpubkey" > /home/fedora/.ssh/authorized_keys
-    chmod 0600 /home/fedora/.ssh/authorized_keys
-    chown -R fedora:fedora /home/fedora
+    useradd -G wheel user1
+    mkdir -p /home/user1/.ssh
+    chmod 0700 /home/user1/.ssh
+    echo "$sshpubkey" > /home/user1/.ssh/authorized_keys
+    chmod 0600 /home/user1/.ssh/authorized_keys
+    chown -R user1:user1 /home/user1
 EOF
