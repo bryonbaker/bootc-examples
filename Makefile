@@ -2,7 +2,9 @@
 IMAGE_NAME := quay.io/bryonbaker/rhel9-bootc
 TAG := latest
 SSH_PUB_KEY := $(shell cat $(HOME)/.ssh/id_rsa.pub)
-
+RHEL_IMAGE_BUILDER := registry.redhat.io/rhel9/bootc-image-builder:latest
+CENTOS_IMAGE_BUILDER := quay.io/centos-bootc/bootc-image-builder:latest 
+IMAGE_BUILDER := $(RHEL_IMAGE_BUILDER)
 
 .PHONY: all build push clean boot
 
@@ -22,5 +24,5 @@ clean:
 
 boot:
 	sudo podman run --rm -it --privileged -v .:/output:Z \
-	registry.redhat.io/rhel9/bootc-image-builder \
-	--type anaconda-iso $(IMAGE_NAME):$(TAG)
+	$(IMAGE_BUILDER) --type iso \
+	$(IMAGE_NAME):$(TAG)
