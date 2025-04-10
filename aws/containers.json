@@ -1,0 +1,11 @@
+[
+  {
+    "Description": "BOOTC Image",
+    "Format": "RAW",
+    "UserBucket": {
+      "S3Bucket": "brbaker-ami",
+      "S3Key": "236551b6-1c04-4c18-a9e1-9779338f2c26-disk.raw"
+    }
+  }
+]
+
